@@ -19,8 +19,7 @@
         NSLog(@"Access to camera granted");
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"Access granted"];
         [self invokeCallback:command withResult:result];
-    }
-    else if (authStatus == AVAuthorizationStatusNotDetermined) {
+    } else {
         NSLog(@"Access to camera not yet determined. Will ask user.");
         __block CDVPluginResult* result = nil;
 
@@ -31,11 +30,6 @@
                 NSLog(@"Not granted access to %@", AVMediaTypeVideo);
             }
         }];
-    }
-    else {
-        NSLog(@"Access to camera denied");
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Access denied"];
-        [self invokeCallback:command withResult:result];
     }
 }
 
